@@ -2,6 +2,8 @@
 
 import sys
 import urllib
+import gzip
+import shutil
 
 CONTENT_MIRROR="http://ftp.uk.debian.org/debian/dists/stable/main/"
 
@@ -27,3 +29,11 @@ print("Attempting to pull the contents package of " + ARCH + " Using the mirror:
 # $MIRROR_URL + "Contents-" + $ARCH + ".gz"
 CONTENTS_GZ = CONTENT_MIRROR + "Contents-" + ARCH + ".gz"
 urllib.urlretrieve (CONTENTS_GZ, "/tmp/contents.gz", reporthook=dlProgress)
+
+#gunzip the file: taken from: https://stackoverflow.com/a/44712152
+with gzip.open('/tmp/contents.gz', 'rb') as f_in:
+    with open('/tmp/contents.txt', 'wb') as f_out:
+        shutil.copyfileobj(f_in, f_out)
+
+#neither the gunzip or the urlretreive complain if the file already exists, so just going to be okay with it overwriting existing files.
+

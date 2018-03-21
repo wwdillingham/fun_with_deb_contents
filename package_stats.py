@@ -4,6 +4,7 @@ import sys
 import urllib
 import gzip
 import shutil
+import operator
 
 CONTENT_MIRROR="http://ftp.uk.debian.org/debian/dists/stable/main/"
 
@@ -57,3 +58,28 @@ with open('/tmp/contents_column2.txt') as infile:
     f = open( '/tmp/separated_list', 'w' )
     f.write(contents)
     f.close()
+
+#now we have commas removed, each item is on its own line.
+#need to harness the last item in the optional/optional/package structure and make it just be "package"
+f = open("/tmp/separated_list", "r")
+g = open("/tmp/packages_only", "w")
+
+for line in f:
+    g.write(line.split('/', -1)[-1])
+
+#results = sorted(results, reverse=True)[:10]
+#print(results)
+frequency = {}
+package_list = open('/tmp/packages_only', 'r')
+for package in package_list:
+    count = frequency.get(package,0)
+    frequency[package] = count + 1
+
+frequency_list = frequency.keys()
+
+# we now have a dict, frequency and need to sort by value, decsdencing, and print out top ten
+
+maximal = max(frequency.iteritems(), key=operator.itemgetter(1))[0]
+print(maximal.strip('\n')), frequency[maximal]
+
+

@@ -21,4 +21,6 @@ Column2 is fomatted as a comma separated list of: OPTIONAL_ITEM/OPTIONAL_ITEM/PA
 If only one PACKAGE provides the contents of column1 only one item in the list, if multiple packages could provide the column1 file, a comma separated list is created
 therefore PACKAGE_NAME should be extracted and tabulated. Each instance of PACKAGE_NAME can be assumed to mean, it provides a file.
 
-
+parsing strategy:
+remove column1 entirely. On column2, if a line is comma separated, take the comma separated values, and place each on an individual line.
+Trim the optional/optional/required such that only the required item is present. 

@@ -49,3 +49,11 @@ for line in f:
 
 f.close()
 g.close()
+
+#convert commas to new lines, and put the contents into a separate file (/tmp/separated_list)
+with open('/tmp/contents_column2.txt') as infile:
+    contents = infile.read()
+    contents = contents.replace(',', '\n')
+    f = open( '/tmp/separated_list', 'w' )
+    f.write(contents)
+    f.close()

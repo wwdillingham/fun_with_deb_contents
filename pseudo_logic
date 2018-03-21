@@ -1,0 +1,24 @@
+initial strategy:
+-infer from command line argument the url
+    - that would be $MIRROR_URL + "Contents-" + $ARCH + ".gz"
+-gunzip that .gz
+    - discard the .gz upon sucessfull completion of extraction
+    - if possible grab the name of the extracted file here, safer than inferring.
+-begin parsing the file with the name as extracted above (if need to infer it appears to be: "Contents-$ARCH"
+-the file strcuture appears to be:
+ Column1 [tab] Column2
+where column1 is unique as confirmed here:
+
+> wc -l Contents-amd64
+ 5146991 Contents-amd64
+
+> cat Contents-amd64 | cut -f 1 | uniq | wc -l
+ 5146991
+
+for the purposes of this exercise the contents of colum1 are irrelevant
+
+Column2 is fomatted as a comma separated list of: OPTIONAL_ITEM/OPTIONAL_ITEM/PACKAGE_NAME
+If only one PACKAGE provides the contents of column1 only one item in the list, if multiple packages could provide the column1 file, a comma separated list is created
+therefore PACKAGE_NAME should be extracted and tabulated. Each instance of PACKAGE_NAME can be assumed to mean, it provides a file.
+
+

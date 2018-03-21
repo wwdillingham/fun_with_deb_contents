@@ -1,6 +1,6 @@
 ## Usage
 ```
-package_stats.py arch
+python package_stats.py arch
 ```
 
 where arch is a valid arch (amd64, etc)

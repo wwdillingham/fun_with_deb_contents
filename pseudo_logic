@@ -24,3 +24,7 @@ therefore PACKAGE_NAME should be extracted and tabulated. Each instance of PACKA
 parsing strategy:
 remove column1 entirely. On column2, if a line is comma separated, take the comma separated values, and place each on an individual line.
 Trim the optional/optional/required such that only the required item is present. 
+Suck up the packages line by line into a dict and set the value of they key (packagename) to be the number of iterations of the package in the file
+print the key value of the maximum value in the dict
+remove that item, repeat 9 more times, to get the top 10.
+

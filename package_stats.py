@@ -79,7 +79,9 @@ frequency_list = frequency.keys()
 
 # we now have a dict, frequency and need to sort by value, decsdencing, and print out top ten
 
-maximal = max(frequency.iteritems(), key=operator.itemgetter(1))[0]
-print(maximal.strip('\n')), frequency[maximal]
-
+#get the maximal value, and print out the key, then the value, then remove that maximal entry from the dict, do this ten times to get top 10
+for i in range(10):
+    maximal = max(frequency.iteritems(), key=operator.itemgetter(1))[0]
+    print(maximal.strip('\n')), frequency[maximal]
+    del frequency[maximal]
 
